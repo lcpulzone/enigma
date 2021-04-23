@@ -19,7 +19,7 @@ RSpec.describe EnigmaPractice do
     it 'can change a letter to another letter' do
       enigma_practice = EnigmaPractice.new
 
-      expect(enigma_practice.letter_change("a")).to eq("c")
+      expect(enigma_practice.letter_change("a")).to eq("b")
     end
 
     it 'can change a couple letters' do

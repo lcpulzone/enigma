@@ -1,16 +1,16 @@
 require 'key'
-require 'encrypt'
+require 'crypt'
 
 class Enigma
   attr_reader :key,
-                   :encrypt,
+                   :crypt,
                    :range,
                    :num_array
 
   def initialize
     alphabet
     @key = Key.new
-    @encrypt = Encrypt.new
+    @crypt = Crypt.new
     @range = (0..9).to_a
     @num_array = @range.sample(5).to_s
   end
@@ -20,7 +20,7 @@ class Enigma
   end
 
   def encrypt(message, key = @num_array, date = Date.today.strftime('%d%m%y').to_i)
-    @encrypt.word_to_ord(message)
+    @crypt.word_to_ord(message)
 
     # cons_key = []
     # cons_key << key

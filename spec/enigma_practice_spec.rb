@@ -80,7 +80,7 @@ RSpec.describe EnigmaPractice do
       expect(enigma_practice.shift_right(expected, 3)).to eq([111, 104, 108, 106, 107])
     end
 
-    it 'can change shifted number array to letters' do
+    it 'shifted_num_array can change shifted number array to letters' do
       enigma_practice = EnigmaPractice.new
       expected = enigma_practice.word_to_ord("leigh")
       actual = enigma_practice.shift_right(expected, 3)
@@ -88,12 +88,22 @@ RSpec.describe EnigmaPractice do
       expect(enigma_practice.shifted_num_array(actual)).to eq("ohljk")
     end
 
-    it 'can change word according to shift given' do
-      enigma_practice = EnigmaPractice.new
+    it 'given_shift_right can change word according to calculated shift' do
       enigma_practice = EnigmaPractice.new
       expected = enigma_practice.word_to_ord("leigh")
 
-      expect(enigma_practice.given_shift_right(expected, [2, 20, 13, 10]))
+      expect(enigma_practice.given_shift_right(expected, [2, 20, 13, 10])).to eq([110, 121, 118, 113, 106])
+    end
+
+    it 'given_shift_right can change a full name according to calculated shift' do
+      enigma_practice = EnigmaPractice.new
+      expected = enigma_practice.word_to_ord("amber leigh")
+      shift_key = [2, 20, 13, 10]
+      actual = [99, 129, 111, 111, 116, 32, 128, 114, 115, 105, 124]
+                #[97, 109, 98, 101, 114, 32, 108, 101, 105, 103, 104]
+                #[02,  20, 13,  10,  02,  00,   20,   13,  10,   02,   20]
+
+      expect(enigma_practice.given_shift_right(expected, shift_key)).to eq(actual)
     end
   end
 

@@ -87,6 +87,14 @@ RSpec.describe EnigmaPractice do
 
       expect(enigma_practice.shifted_num_array(actual)).to eq("ohljk")
     end
+
+    it 'can change word according to shift given' do
+      enigma_practice = EnigmaPractice.new
+      enigma_practice = EnigmaPractice.new
+      expected = enigma_practice.word_to_ord("leigh")
+
+      expect(enigma_practice.given_shift_right(expected, [2, 20, 13, 10]))
+    end
   end
 
   context 'decrypt with .ord and .chr -dynamic-' do

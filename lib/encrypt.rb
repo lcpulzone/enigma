@@ -27,22 +27,25 @@ class Encrypt
     (single_letter_ord(letter) + num).chr
   end
 
-###USING ORD & CHR -DYNAMIC-###
-  def word_to_ord(word)
-    word.chars.map do |letter|
-      letter.ord
-    end
-  end
-
   def shift_right(letter_array, key = 1)
     letter_array.map do |letter|
       letter + key
     end
   end
 
-  # need an if statement, need to know when to reset it to 0, If it's reached 5 reset to 0
-  #put an if statement here to check the counter (is it over? restart if so) (length - 1)
-  # need to be able to tell the key when to go back to zero = 1)
+  def shift_left(encrypted_array, key = 1)
+    encrypted_array.map do |array|
+      array - key
+    end
+  end
+
+###ENCRYPT -DYNAMIC-###
+  def word_to_ord(word)
+    word.chars.map do |letter|
+      (letter.downcase).ord
+    end
+  end
+
   def given_shift_right(letter_array, key = 1)
     amount = letter_array.count
     counter = 0
@@ -79,9 +82,24 @@ class Encrypt
     end
   end
 
-  def shift_left(encrypted_array, key = 1)
-    encrypted_array.map do |array|
-      array - key
+  def given_shift_left(letter_array, key = 1)
+    amount = letter_array.count
+    counter = 0
+    shifted = letter_array.map do |letter|
+      if counter == 4
+        counter = 0
+      end
+      if letter == 32
+        letter = 32
+      else
+        if result = (letter - key[counter]) <= 96
+        result = (letter + 27) - key[counter]
+        elsif
+          result = (letter - key[counter])
+        end
+        counter += 1
+        result
+      end
     end
   end
 

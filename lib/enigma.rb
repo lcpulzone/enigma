@@ -1,13 +1,16 @@
 require 'key'
+require 'encrypt'
 
 class Enigma
   attr_reader :key,
+                   :encrypt,
                    :range,
                    :num_array
 
   def initialize
     alphabet
     @key = Key.new
+    @encrypt = Encrypt.new
     @range = (0..9).to_a
     @num_array = @range.sample(5).to_s
   end
@@ -17,7 +20,7 @@ class Enigma
   end
 
   def encrypt(message, key = @num_array, date = Date.today.strftime('%d%m%y').to_i)
-    word_to_ord(message)
+    @encrypt.word_to_ord(message)
 
     # cons_key = []
     # cons_key << key
@@ -33,11 +36,5 @@ class Enigma
     #shift message according to the shift key created
 
     #create hash with message, key and date as a string
-  end
-
-  def word_to_ord(message)
-    message.chars.map do |letter|
-      letter.ord
-    end
   end
 end

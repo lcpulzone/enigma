@@ -47,7 +47,7 @@ RSpec.describe EnigmaPractice do
       expect(enigma_practice.change_array_to_ord).to eq(expected)
     end
 
-    it 'can chanage a single letter to an ordinal' do
+    it 'can change a single letter to an ordinal' do
       enigma_practice = EnigmaPractice.new
 
       expect(enigma_practice.single_letter_ord("a")).to eq(97)

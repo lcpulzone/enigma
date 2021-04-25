@@ -40,15 +40,23 @@ class EnigmaPractice
     end
   end
 
+  # need an if statement, need to know when to reset it to 0, If it's reached 5 reset to 0
+  #put an if statement here to check the counter (is it over? restart if so) (length - 1)
+  # need to be able to tell the key when to go back to zero = 1)
   def given_shift_right(letter_array, key = 1)
     amount = letter_array.count
     counter = 0
-    until counter == amount # need an if statement, need to knowo when to reset it to 0, If it's reached 5 reset to 0
     shifted = letter_array.map do |letter|
-      #put an if statement here to check the counter (is it over? restart if so) (length - 1)
-      result = (letter + key[counter]) # need to be able to tell the key when to go back to zero
-      counter += 1
-      result
+      if counter == 4
+        counter = 0
+      end
+      if letter == 32
+        letter = 32
+      else
+        result = (letter + key[counter])
+        counter += 1
+        result
+      end
     end
   end
 

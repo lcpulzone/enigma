@@ -1,5 +1,5 @@
 require 'rspec'
-require './lib/enigma_practice'
+require './lib/encrypt' 
 require './lib/offset'
 
 RSpec.describe Offset do

@@ -121,8 +121,14 @@ RSpec.describe Encrypt do
       expect(encrypt.back_to_og_word(ord_array)).to eq("leigh")
     end
   end
-  
+
   context 'encrypt & decrypt with optional key added' do
+    it 'word_to_ord can take an upper or lower case letter' do
+      encrypt = Encrypt.new
+
+      expect(encrypt.word_to_ord("Leigh")).to eq([108, 101, 105, 103, 104])
+    end
+
     it 'given_shift_right can change word according to calculated shift' do
       encrypt = Encrypt.new
       expected = encrypt.word_to_ord("leigh")

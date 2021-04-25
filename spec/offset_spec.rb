@@ -9,5 +9,6 @@ RSpec.describe Offset do
 
       expect(offset).to be_an_instance_of(Offset)
     end
+
   end
 end

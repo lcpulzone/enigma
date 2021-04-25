@@ -37,6 +37,20 @@ RSpec.describe Key do
 
       expect(key.final_key_creator).to eq([51, 13, 38, 87])
     end
+  end
 
+  context 'offset creation' do
+    it 'can calculate a final shift' do
+      key = Key.new
+      mock_key = [5, 1, 3, 8 , 7]
+
+      allow(key).to receive(:num_array) do
+        mock_key
+      end
+
+      expect(key.final_key_creator).to eq([51, 13, 38, 87])
+      expect(key.create_offset(Date.today)).to eq(["1", "2", "4", "1"])
+      expect(key.final_shift).to eq([52, 15, 42, 88])
+    end
   end
 end

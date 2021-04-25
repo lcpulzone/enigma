@@ -1,3 +1,5 @@
+require 'date'
+
 class Key
   attr_reader :range,
                    :num_array,
@@ -18,8 +20,8 @@ class Key
     @the_key
   end
 
-  def create_offset(date)
-    sq_date = date.strftime('%m%d%y').to_i
+  def create_offset(date = Date.today)
+    sq_date = date.strftime('%d%m%y').to_i
     last_dig = (sq_date**2).to_s
     the_almost_offset = last_dig[6..9]
     @the_offset << the_almost_offset.split("")
@@ -27,11 +29,15 @@ class Key
   end
 
   def final_shift
-    final = []
-    final << (@the_key[0] + (@the_offset[0]).to_i)
-    final << (@the_key[1] + (@the_offset[1]).to_i)
-    final << (@the_key[2] + (@the_offset[2]).to_i)
-    final << (@the_key[3] + (@the_offset[3]).to_i)
-    final
+    counter = 0
+    final = @the_key.map do |key|
+      result = (key + @the_offset[counter].to_i)
+      counter += 1
+      result
+    end
+    offset = final.map do |fine|
+      fine % 27
+    end
+    offset
   end
 end

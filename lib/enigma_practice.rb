@@ -66,4 +66,4 @@ class EnigmaPractice
     end
     word.join
   end
-end
+end 

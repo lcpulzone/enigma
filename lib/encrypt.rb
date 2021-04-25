@@ -1,4 +1,4 @@
-class EnigmaPractice
+class Encrypt
 
   def initialize
     alphabet
@@ -53,7 +53,12 @@ class EnigmaPractice
       if letter == 32
         letter = 32
       else
-        result = (letter + key[counter])
+        if result = (letter + key[counter]) < 123
+          result = (letter + key[counter])
+        elsif
+          result = (letter + key[counter]) >= 123
+          result = (letter + key[counter]) - 27
+        end
         counter += 1
         result
       end

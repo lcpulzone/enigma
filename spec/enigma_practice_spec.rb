@@ -1,5 +1,6 @@
 require 'rspec'
 require './lib/enigma_practice'
+require './lib/key'
 
 RSpec.describe EnigmaPractice do
   context 'initialization' do

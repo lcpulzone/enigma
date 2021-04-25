@@ -1,6 +1,7 @@
 require 'rspec'
 require './lib/enigma_practice'
 require './lib/key'
+require 'date'
 
 RSpec.describe Key do
   context 'initialization' do
@@ -49,8 +50,8 @@ RSpec.describe Key do
       end
 
       expect(key.final_key_creator).to eq([51, 13, 38, 87])
-      expect(key.create_offset(Date.today)).to eq(["1", "2", "4", "1"])
-      expect(key.final_shift).to eq([52, 15, 42, 88])
+      expect(key.create_offset(Date.today)).to eq(["5", "7", "2", "4"])
+      expect(key.final_shift).to eq([2, 20, 13, 10])
     end
   end
 end

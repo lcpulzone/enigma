@@ -39,9 +39,9 @@ class Key
     elsif date.class == String
       sq_date = date.to_i
     end
-    last_dig = (sq_date**2).to_s
-    the_almost_offset = last_dig[6..9]
-    @the_offset_array << the_almost_offset.split("")
+    sq_date_str = (sq_date**2).to_s
+    last_four_dig = sq_date_str[6..9]
+    @the_offset_array << last_four_dig.split("")
     @the_offset_array.flatten!
   end
 
@@ -54,9 +54,9 @@ class Key
       counter += 1
       result
     end
-    offset = final.map do |fine|
+    final_shift_key = final.map do |fine|
       fine % 27
     end
-    offset
+    final_shift_key
   end
 end

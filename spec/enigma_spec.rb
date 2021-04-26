@@ -32,6 +32,19 @@ RSpec.describe Enigma do
 
       expect(enigma.encrypt('hello world', '02715', '040895')).to eq(actual)
     end
+
+    it 'can encrypt a name' do
+      enigma = Enigma.new
+
+      actual = {
+        encryption: "zaqlp algvw",
+        key: "51387",
+        date: "042421"
+      }
+
+      expect(enigma.encrypt('amber leigh', '51387', '042421')).to eq(actual)
+    end
+
   end
 
   context 'decrypt' do
@@ -45,6 +58,18 @@ RSpec.describe Enigma do
       }
 
       expect(enigma.decrypt('keder ohulw', '02715', '040895'))
+    end
+
+    it 'can decrypt a name' do
+      enigma = Enigma.new
+
+      actual = {
+        decryption: "amber leigh",
+        key: "51387",
+        date: "042421"
+      }
+
+      expect(enigma.decrypt('zaqlp algvw', '51387', '042421'))
     end
   end
 end

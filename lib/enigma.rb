@@ -28,9 +28,12 @@ class Enigma
     shift_key = @key.final_shift(encrypted_key, encrypted_offset)
     message_as_ord = @crypt.word_to_ord(message)
     encrypted_ordinal_array = @crypt.given_shift_right(message_as_ord, shift_key)
-    @crypt.shifted_num_array(encrypted_ordinal_array)
+    encrypted_message = @crypt.shifted_num_array(encrypted_ordinal_array)
 
-
-    #create hash with message, key and date as a string
+    encrypted_hash = {
+      encryption: encrypted_message,
+      key: key.to_s,
+      date: date.to_s
+    }
   end
 end

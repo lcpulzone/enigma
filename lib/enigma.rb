@@ -21,7 +21,7 @@ class Enigma
   end
 
   def encrypt(message, key = num_array, date = Date.today.strftime('%d%m%y').to_i)
-    encrypted_key = @key.final_key_creator(key)
+    encrypted_key = @key.key_generator(key)
 
     encrypted_offset = @key.create_offset(date)
 
@@ -38,7 +38,7 @@ class Enigma
   end
 
   def decrypt(message, key, date = Date.today.strftime('%d%m%y').to_i)
-    encrypted_key = @key.final_key_creator(key)
+    encrypted_key = @key.key_generator(key)
 
     encrypted_offset = @key.create_offset(date)
 

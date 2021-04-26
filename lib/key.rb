@@ -33,6 +33,7 @@ class Key
   end
 
   def create_offset(date = Date.today)
+    sq_date = sq_date
     if date.class == Date
       sq_date = date.strftime('%d%m%y').to_i
     elsif date.class == String

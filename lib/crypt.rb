@@ -56,11 +56,11 @@ class Crypt
         counter += 1
         letter = 32
       else
-        if result = (letter + key[counter]) < 123
+        if (letter + key[counter]) < 123
           result = (letter + key[counter])
-        elsif result = (letter + key[counter]) == 123
+        elsif (letter + key[counter]) == 123
               result = (letter + key[counter]) - 26
-        elsif result = (letter + key[counter]) > 123
+        elsif (letter + key[counter]) > 123
               result = (letter + key[counter]) - 27
         end
         counter += 1
@@ -95,7 +95,7 @@ class Crypt
       else
         if letter == 97
           result = (letter + 26) - key[counter]
-        elsif result = (letter - key[counter]) <= 96
+        elsif (letter - key[counter]) <= 96
         result = (letter + 27) - key[counter]
         elsif
           result = (letter - key[counter])

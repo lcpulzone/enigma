@@ -1,4 +1,5 @@
 require 'date'
+require 'enigma'
 
 class Key
   attr_reader :range,
@@ -32,14 +33,18 @@ class Key
   end
 
   def create_offset(date = Date.today)
-    sq_date = date.strftime('%d%m%y').to_i
+    if date.class == Date
+      sq_date = date.strftime('%d%m%y').to_i
+    elsif date.class == String
+      sq_date = date.to_i
+    end
     last_dig = (sq_date**2).to_s
     the_almost_offset = last_dig[6..9]
     @the_offset << the_almost_offset.split("")
     @the_offset.flatten!
   end
 
-  def final_shift
+  def final_shift(key = @the_key, offset = @the_offset)
     counter = 0
     final = @the_key.map do |key|
       result = (key + @the_offset[counter].to_i)

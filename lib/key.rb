@@ -22,7 +22,7 @@ class Key
     test
   end
 
-  def final_key_creator(key = @num_array)
+  def key_generator(key = @num_array)
     if key.class == String
       key = key_into_integer(key)
     end
@@ -46,7 +46,7 @@ class Key
   end
 
   def final_shift(key = @the_key, offset = @the_offset)
-    # key = final_key_creator(key = num_array)
+    # key = key_generator(key = num_array)
     offset = create_offset
     counter = 0
     final = @the_key.map do |key|

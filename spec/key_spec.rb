@@ -33,7 +33,7 @@ RSpec.describe Key do
     it 'can separate a number into five sets of two' do
       key = Key.new
 
-      expect(key.final_key_creator([5, 1, 3, 8 , 7])).to eq([51, 13, 38, 87])
+      expect(key.key_generator([5, 1, 3, 8 , 7])).to eq([51, 13, 38, 87])
     end
   end
 
@@ -49,7 +49,7 @@ RSpec.describe Key do
       allow(Date).to receive(:today).and_return(Date.new(2021, 04, 24))
 
       key = Key.new
-      encrypted_key = key.final_key_creator([5, 1, 3, 8, 7])
+      encrypted_key = key.key_generator([5, 1, 3, 8, 7])
 
       expect(key.final_shift(encrypted_key, (Date.today))).to eq([2, 20, 13, 10])
     end

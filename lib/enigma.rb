@@ -1,3 +1,4 @@
+require 'date'
 require 'key'
 require 'crypt'
 
@@ -19,21 +20,16 @@ class Enigma
     ("a".."z").to_a << " "
   end
 
-  def encrypt(message, key = @num_array, date = Date.today.strftime('%d%m%y').to_i)
-    @crypt.word_to_ord(message)
+  def encrypt(message, key = num_array, date = Date.today.strftime('%d%m%y').to_i)
+    encrypted_key = @key.final_key_creator(key)
 
-    # cons_key = []
-    # cons_key << key
-    # the_key = []
-    # cons_key.each_cons(2) { |k| the_key << k.join.to_i }
+    encrypted_offset = @key.create_offset(date)
 
-    #take the key method created in key class
+    shift_key = @key.final_shift(encrypted_key, encrypted_offset)
+    message_as_ord = @crypt.word_to_ord(message)
+    encrypted_ordinal_array = @crypt.given_shift_right(message_as_ord, shift_key)
+    @crypt.shifted_num_array(encrypted_ordinal_array)
 
-    #take the date method used in key class
-
-    #utilize the shift method used in key class
-
-    #shift message according to the shift key created
 
     #create hash with message, key and date as a string
   end

@@ -21,6 +21,7 @@ RSpec.describe Key do
       key = Key.new
 
       expect(key.num_array.length).to eq(5)
+      expect(key.num_array.class).to eq(Array)
     end
 
     it 'key_into_integer turns a string into an integer' do
@@ -42,10 +43,9 @@ RSpec.describe Key do
       allow(Date).to receive(:today).and_return(Date.new(2021, 04, 24))
 
       key = Key.new
+      encrypted_key = key.final_key_creator([5, 1, 3, 8, 7])
 
-      expect(key.final_key_creator([5, 1, 3, 8, 7])).to eq([51, 13, 38, 87])
-      expect(key.create_offset(Date.today)).to eq(["5", "7", "2", "4"])
-      expect(key.final_shift ).to eq([2, 20, 13, 10])
+      expect(key.final_shift(encrypted_key, (Date.today))).to eq([2, 20, 13, 10])
     end
   end
 end

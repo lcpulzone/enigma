@@ -17,15 +17,11 @@ RSpec.describe Key do
       expect(key.range).to eq([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
     end
 
-    it 'creates a random set of numbers' do
+    it 'num_array creates a random set of numbers at the length of five' do
       key = Key.new
-      mock_key = [5, 1, 3, 8 , 7]
 
-      allow(key).to receive(:num_array) do
-        mock_key
-      end
-
-      expect(key.num_array).to eq([5, 1, 3, 8 , 7])
+      expect(key.num_array.length).to eq(5)
+      expect(key.num_array.class).to eq(Array)
     end
 
     it 'key_into_integer turns a string into an integer' do
@@ -36,13 +32,8 @@ RSpec.describe Key do
 
     it 'can separate a number into five sets of two' do
       key = Key.new
-      mock_key = [5, 1, 3, 8 , 7]
 
-      allow(key).to receive(:num_array) do
-        mock_key
-      end
-
-      expect(key.final_key_creator).to eq([51, 13, 38, 87])
+      expect(key.final_key_creator([5, 1, 3, 8 , 7])).to eq([51, 13, 38, 87])
     end
   end
 
@@ -52,12 +43,9 @@ RSpec.describe Key do
       allow(Date).to receive(:today).and_return(Date.new(2021, 04, 24))
 
       key = Key.new
+      encrypted_key = key.final_key_creator([5, 1, 3, 8, 7])
 
-      allow(key).to receive(:num_array).and_return([5, 1, 3, 8 , 7])
-
-      expect(key.final_key_creator).to eq([51, 13, 38, 87])
-      expect(key.create_offset(Date.today)).to eq(["5", "7", "2", "4"])
-      expect(key.final_shift ).to eq([2, 20, 13, 10])
+      expect(key.final_shift(encrypted_key, (Date.today))).to eq([2, 20, 13, 10])
     end
   end
 end

@@ -36,4 +36,23 @@ class Enigma
       date: date.to_s
     }
   end
+
+  def decrypt(message, key, date = Date.today.strftime('%d%m%y').to_i)
+    encrypted_key = @key.final_key_creator(key)
+
+    encrypted_offset = @key.create_offset(date)
+
+    shift_key = @key.final_shift(encrypted_key, encrypted_offset)
+
+    encrypted_ord = @crypt.encrypted_ord(message)
+    decrypted_ordinal_array = @crypt.given_shift_left(encrypted_ord, shift_key)
+    decrypted_message = @crypt.back_to_og_word(decrypted_ordinal_array)
+
+    encrypted_hash = {
+      decryption: decrypted_message,
+      key: key.to_s,
+      date: date.to_s
+    }
+
+  end
 end

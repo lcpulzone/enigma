@@ -1,4 +1,4 @@
-class Encrypt
+class Crypt
 
   def initialize
     alphabet
@@ -47,20 +47,21 @@ class Encrypt
   end
 
   def given_shift_right(letter_array, key = 1)
-    amount = letter_array.count
     counter = 0
     shifted = letter_array.map do |letter|
       if counter == 4
         counter = 0
       end
       if letter == 32
+        counter += 1
         letter = 32
       else
         if result = (letter + key[counter]) < 123
           result = (letter + key[counter])
-        elsif
-          result = (letter + key[counter]) >= 123
-          result = (letter + key[counter]) - 27
+        elsif result = (letter + key[counter]) == 123
+              result = (letter + key[counter]) - 26
+        elsif result = (letter + key[counter]) > 123
+              result = (letter + key[counter]) - 27
         end
         counter += 1
         result
@@ -83,13 +84,13 @@ class Encrypt
   end
 
   def given_shift_left(letter_array, key = 1)
-    amount = letter_array.count
     counter = 0
     shifted = letter_array.map do |letter|
       if counter == 4
         counter = 0
       end
       if letter == 32
+        counter += 1  
         letter = 32
       else
         if result = (letter - key[counter]) <= 96

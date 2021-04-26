@@ -21,12 +21,6 @@ RSpec.describe Enigma do
   end
 
   context 'encrypt' do
-    xit 'can change a word into an ordinal' do
-      enigma = Enigma.new
-
-      expect(enigma.word_to_ord('hello world')).to eq([104, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100])
-    end
-
     it 'can encrypt a message' do
       enigma = Enigma.new
 

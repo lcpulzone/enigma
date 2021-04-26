@@ -41,7 +41,7 @@ RSpec.describe Key do
     it 'can give an offset' do
       key = Key.new
 
-      expect(key.create_offset('042421')).to eq(["1", "2", "4", "1"])
+      expect(key.calculate_offset('042421')).to eq(["1", "2", "4", "1"])
     end
 
     it 'can calculate a final shift' do

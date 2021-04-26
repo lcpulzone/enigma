@@ -32,7 +32,7 @@ class Key
     @the_key
   end
 
-  def create_offset(date = Date.today)
+  def calculate_offset(date = Date.today)
     sq_date = sq_date
     if date.class == Date
       sq_date = date.strftime('%d%m%y').to_i
@@ -47,7 +47,7 @@ class Key
 
   def final_shift(key = @the_key, offset = @the_offset)
     # key = key_generator(key = num_array)
-    offset = create_offset
+    offset = calculate_offset
     counter = 0
     final = @the_key.map do |key|
       result = (key + @the_offset[counter].to_i)

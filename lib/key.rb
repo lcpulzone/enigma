@@ -13,9 +13,20 @@ class Key
     @the_offset = []
   end
 
-  def final_key_creator
-    num_array.each_cons(2) do |num|
-      @the_key << num.join.to_i
+  def key_into_integer(string_key)
+    str_k = string_key.split("")
+    str_k.map do |key|
+      key.to_i
+    end
+  end
+
+  def final_key_creator(key = num_array)
+    if key.class == String
+      key_into_integer(key)
+    else
+      key.each_cons(2) do |num|
+        @the_key << num.join.to_i
+      end
     end
     @the_key
   end

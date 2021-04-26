@@ -1,6 +1,6 @@
 require 'date'
-require 'key'
-require 'crypt'
+require_relative 'key'
+require_relative 'crypt'
 
 class Enigma
   attr_reader :key,

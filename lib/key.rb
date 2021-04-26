@@ -1,5 +1,5 @@
 require 'date'
-require 'enigma'
+require_relative 'enigma'
 
 class Key
   attr_reader :range,

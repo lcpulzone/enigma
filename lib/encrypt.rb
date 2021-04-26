@@ -1,9 +1,7 @@
 require 'time'
 require './lib/enigma'
-# require './lib/key'
 
 enigma = Enigma.new
-# key = Key.new
 
 original_text = File.open(ARGV[0], "r")
 

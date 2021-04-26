@@ -96,7 +96,7 @@ class Crypt
         if letter == 97
           result = (letter + 26) - key[counter]
         elsif (letter - key[counter]) <= 96
-        result = (letter + 27) - key[counter]
+          result = (letter + 27) - key[counter]
         elsif
           result = (letter - key[counter])
         end

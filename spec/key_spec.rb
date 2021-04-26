@@ -31,13 +31,8 @@ RSpec.describe Key do
 
     it 'can separate a number into five sets of two' do
       key = Key.new
-      mock_key = [5, 1, 3, 8 , 7]
 
-      allow(key).to receive(:num_array) do
-        mock_key
-      end
-
-      expect(key.final_key_creator).to eq([51, 13, 38, 87])
+      expect(key.final_key_creator([5, 1, 3, 8 , 7])).to eq([51, 13, 38, 87])
     end
   end
 

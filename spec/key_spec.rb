@@ -17,7 +17,7 @@ RSpec.describe Key do
       expect(key.range).to eq([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
     end
 
-    it 'creates a random set of numbers' do #test that it's the length of five
+    it 'num_array creates a random set of numbers at the length of five' do
       key = Key.new
 
       expect(key.num_array.length).to eq(5)

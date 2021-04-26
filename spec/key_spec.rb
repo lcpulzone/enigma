@@ -17,15 +17,10 @@ RSpec.describe Key do
       expect(key.range).to eq([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
     end
 
-    it 'creates a random set of numbers' do
+    it 'creates a random set of numbers' do #test that it's the length of five
       key = Key.new
-      mock_key = [5, 1, 3, 8 , 7]
 
-      allow(key).to receive(:num_array) do
-        mock_key
-      end
-
-      expect(key.num_array).to eq([5, 1, 3, 8 , 7])
+      expect(key.num_array.length).to eq(5)
     end
 
     it 'key_into_integer turns a string into an integer' do

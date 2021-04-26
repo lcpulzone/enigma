@@ -27,7 +27,7 @@ RSpec.describe Enigma do
       expect(enigma.word_to_ord('hello world')).to eq([104, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100])
     end
 
-    xit 'can encrypt a word' do
+    it 'can encrypt a message' do
       enigma = Enigma.new
 
       actual = {

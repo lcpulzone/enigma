@@ -38,6 +38,12 @@ RSpec.describe Key do
   end
 
   context 'offset creation' do
+    it 'can give an offset' do
+      key = Key.new
+
+      expect(key.create_offset('042421')).to eq(["1", "2", "4", "1"])
+    end
+
     it 'can calculate a final shift' do
 
       allow(Date).to receive(:today).and_return(Date.new(2021, 04, 24))

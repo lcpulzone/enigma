@@ -29,13 +29,6 @@ class Crypt
     end
   end
 
-  def shifted_num_array(num_array)
-    shifted_word = num_array.map do |num|
-      num.chr
-    end
-    shifted_word.join
-  end
-
   def decrypt_message(message_array, key = 1)
     counter = 0
     shifted = message_array.map do |letter|

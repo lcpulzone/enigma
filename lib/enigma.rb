@@ -22,7 +22,7 @@ class Enigma
     shift_key = @key.final_shift(encrypted_key, encrypted_offset)
     message_as_ord = @crypt.message_to_ord(message)
     encrypted_ordinal_array = @crypt.encrypt_message(message_as_ord, shift_key)
-    encrypted_message = @crypt.shifted_num_array(encrypted_ordinal_array)
+    encrypted_message = @crypt.back_to_og_word(encrypted_ordinal_array)
 
     if key.class == String
       encrypted_hash = {

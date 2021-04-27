@@ -46,7 +46,7 @@ class Enigma
 
     shift_key = @key.final_shift(encrypted_key, encrypted_offset)
 
-    encrypted_ord = @crypt.encrypted_ord(message)
+    encrypted_ord = @crypt.message_to_ord(message)
     decrypted_ordinal_array = @crypt.decrypt_message(encrypted_ord, shift_key)
     decrypted_message = @crypt.back_to_og_word(decrypted_ordinal_array)
 

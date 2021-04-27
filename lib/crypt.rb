@@ -6,9 +6,9 @@ class Crypt
     end
   end
 
-  def encrypt_message(letter_array, key = 1)
+  def encrypt_message(message_array, key = 1)
     counter = 0
-    shifted = letter_array.map do |letter|
+    shifted = message_array.map do |letter|
       if counter == 4
         counter = 0
       end
@@ -36,15 +36,9 @@ class Crypt
     shifted_word.join
   end
 
-  def encrypted_ord(encrypted_word)
-    encrypted_word.chars.map do |word|
-      word.ord
-    end
-  end
-
-  def decrypt_message(letter_array, key = 1)
+  def decrypt_message(message_array, key = 1)
     counter = 0
-    shifted = letter_array.map do |letter|
+    shifted = message_array.map do |letter|
       if counter == 4
         counter = 0
       end

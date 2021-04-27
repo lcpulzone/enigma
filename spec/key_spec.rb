@@ -27,6 +27,13 @@ RSpec.describe Key do
   end
 
   context 'offset creation' do
+
+    it 'can give a square root' do
+      key = Key.new
+
+      expect(key.square_root_to_offset_array(240421)).to eq(["5", "7", "2", "4"])
+    end
+
     it 'can give an offset' do
       key = Key.new
 

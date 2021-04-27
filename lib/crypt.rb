@@ -6,6 +6,13 @@ class Crypt
     end
   end
 
+  def ordinal_to_characters(ord_array)
+    word = ord_array.map do |array|
+      array.chr
+    end
+    word.join
+  end
+
   def encrypt_message(message_array, key = 1)
     counter = 0
     shifted = message_array.map do |letter|
@@ -50,12 +57,5 @@ class Crypt
         result
       end
     end
-  end
-
-  def ordinal_to_characters(ord_array)
-    word = ord_array.map do |array|
-      array.chr
-    end
-    word.join
   end
 end

@@ -19,7 +19,7 @@ RSpec.describe Crypt do
     end
   end
 
-  context 'crypt & decrypt with optional key added' do
+  context 'crypt with optional key added' do
     it 'message_to_ord can take an upper or lower case letter' do
       crypt = Crypt.new
 
@@ -31,6 +31,13 @@ RSpec.describe Crypt do
       expected = crypt.message_to_ord("leigh")
 
       expect(crypt.encrypt_message(expected, [2, 20, 13, 10])).to eq([110, 121, 118, 113, 106])
+    end
+
+    it 'can keep a special character the same ordinal' do
+      crypt = Crypt.new
+      expected = crypt.message_to_ord("leigh!")
+
+      expect(crypt.encrypt_message(expected, [2, 20, 13, 10])).to eq([110, 121, 118, 113, 106, 33])
     end
 
     it 'encrypt_message can change a full name according to calculated shift' do
@@ -59,7 +66,9 @@ RSpec.describe Crypt do
 
       expect(crypt.message_to_ord(encrypted)).to eq(encrypted_ord_array)
     end
+  end
 
+  context 'decrypt' do
     it 'decrypt_messagecan change shift an ordinal array accoring to the key' do
       crypt = Crypt.new
       expected = crypt.message_to_ord("amber leigh")
@@ -82,6 +91,18 @@ RSpec.describe Crypt do
       normal_array = crypt.decrypt_message(encrypted_ordinal_array, shift_key)
 
       expect(crypt.ordinal_to_characters(normal_array)).to eq("amber leigh")
+    end
+
+    it 'special' do
+      crypt = Crypt.new
+      expected = crypt.message_to_ord("amber leigh!")
+      actual = crypt.encrypt_message(expected, [2, 20, 13, 10])
+      encrypted = crypt.ordinal_to_characters(actual)
+      encrypted_ordinal_array = crypt.message_to_ord(encrypted)
+      shift_key = [2, 20, 13, 10]
+      normal_array = crypt.decrypt_message(encrypted_ordinal_array, shift_key)
+
+      expect(crypt.ordinal_to_characters(normal_array)).to eq("amber leigh!")
     end
   end
 end

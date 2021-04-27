@@ -30,7 +30,7 @@ RSpec.describe Enigma do
         date: "040895"
       }
 
-      expect(enigma.encrypt('hello world')).to eq(actual)
+      expect(enigma.encrypt('hello world', '02715', '040895')).to eq(actual)
     end
 
     it 'can encrypt a name' do

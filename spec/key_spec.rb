@@ -10,20 +10,9 @@ RSpec.describe Key do
 
       expect(key).to be_an_instance_of(Key)
     end
+  end
 
-    xit 'creates a range of numbers' do
-      key = Key.new
-
-      expect(key.range).to eq([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-    end
-
-    xit 'num_array creates a random set of numbers at the length of five' do
-      key = Key.new
-
-      expect(key.num_array.length).to eq(5)
-      expect(key.num_array.class).to eq(Array)
-    end
-
+  context 'key_generator and key_into_integer methods' do
     it 'key_into_integer turns a string into an integer' do
       key = Key.new
 

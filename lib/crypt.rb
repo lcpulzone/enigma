@@ -19,9 +19,9 @@ class Crypt
       if counter == 4
         counter = 0
       end
-      if letter == 32
+      if (32..64).include?(letter)
         counter += 1
-        letter = 32
+        result = letter
       else
         if (letter + key[counter]) < 123
           result = (letter + key[counter])
@@ -40,9 +40,9 @@ class Crypt
       if counter == 4
         counter = 0
       end
-      if letter == 32
+      if (32..64).include?(letter)
         counter += 1
-        letter = 32
+        result = letter
       else
         if letter == 97
           result = (letter + 27) - key[counter]

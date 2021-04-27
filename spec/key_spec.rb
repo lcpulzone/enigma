@@ -27,7 +27,6 @@ RSpec.describe Key do
   end
 
   context 'offset creation' do
-
     it 'can give a square root' do
       key = Key.new
 

@@ -29,14 +29,13 @@ RSpec.describe Enigma do
       enigma = Enigma.new
 
       actual = {
-        encryption: "zaqlp algvw",
+        encryption: "zaqlp `lgvw",
         key: "51387",
         date: "042421"
       }
 
       expect(enigma.encrypt('amber leigh', '51387', '042421')).to eq(actual)
     end
-
   end
 
   context 'decrypt' do

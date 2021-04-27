@@ -37,7 +37,7 @@ RSpec.describe Crypt do
       crypt = Crypt.new
       expected = crypt.message_to_ord("amber leigh")
       shift_key = [2, 20, 13, 10]
-      actual = [99, 102, 111, 111, 116, 32, 121, 111, 107, 97, 117]
+      actual = [99, 102, 111, 111, 116, 32, 121, 111, 107, 96, 117]
 
       expect(crypt.encrypt_message(expected, shift_key)).to eq(actual)
     end
@@ -47,7 +47,7 @@ RSpec.describe Crypt do
       expected = crypt.message_to_ord("amber leigh")
       actual = crypt.encrypt_message(expected, [2, 20, 13, 10])
 
-      expect(crypt.ordinal_to_characters(actual)).to eq("cfoot yokau")
+      expect(crypt.ordinal_to_characters(actual)).to eq("cfoot yok`u")
     end
 
     it 'crypted_ord can turn string into ordinal array' do
@@ -55,7 +55,7 @@ RSpec.describe Crypt do
       expected = crypt.message_to_ord("amber leigh")
       actual = crypt.encrypt_message(expected, [2, 20, 13, 10])
       encrypted = crypt.ordinal_to_characters(actual)
-      encrypted_ord_array = [99, 102, 111, 111, 116, 32, 121, 111, 107, 97, 117]
+      encrypted_ord_array = [99, 102, 111, 111, 116, 32, 121, 111, 107, 96, 117]
 
       expect(crypt.message_to_ord(encrypted)).to eq(encrypted_ord_array)
     end

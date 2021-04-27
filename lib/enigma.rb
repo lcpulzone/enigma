@@ -13,28 +13,35 @@ class Enigma
     @key = Key.new
     @crypt = Crypt.new
     @range = (0..9).to_a
-    @num_array = @range.sample(5).to_s
+    @num_array = @range.sample(5)
   end
 
   def alphabet
     ("a".."z").to_a << " "
   end
 
-  def encrypt(message, key = num_array, date = Date.today.strftime('%d%m%y').to_i)
+  def encrypt(message, key = @num_array, date = Date.today.strftime('%d%m%y').to_i)
     encrypted_key = @key.key_generator(key)
 
     encrypted_offset = @key.calculate_offset(date)
-
     shift_key = @key.final_shift(encrypted_key, encrypted_offset)
-    message_as_ord = @crypt.word_to_ord(message)
-    encrypted_ordinal_array = @crypt.given_shift_right(message_as_ord, shift_key)
+    message_as_ord = @crypt.message_to_ord(message)
+    encrypted_ordinal_array = @crypt.encrypt_message(message_as_ord, shift_key)
     encrypted_message = @crypt.shifted_num_array(encrypted_ordinal_array)
 
-    encrypted_hash = {
-      encryption: encrypted_message,
-      key: key.to_s,
-      date: date.to_s
-    }
+    if key.class == String
+      encrypted_hash = {
+        encryption: encrypted_message,
+        key: key,
+        date: date.to_s
+      }
+    else
+      encrypted_hash = {
+        encryption: encrypted_message,
+        key: key.join,
+        date: date.to_s
+      }
+    end
   end
 
   def decrypt(message, key, date = Date.today.strftime('%d%m%y').to_i)
@@ -45,14 +52,22 @@ class Enigma
     shift_key = @key.final_shift(encrypted_key, encrypted_offset)
 
     encrypted_ord = @crypt.encrypted_ord(message)
-    decrypted_ordinal_array = @crypt.given_shift_left(encrypted_ord, shift_key)
+    decrypted_ordinal_array = @crypt.decrypt_message(encrypted_ord, shift_key)
     decrypted_message = @crypt.back_to_og_word(decrypted_ordinal_array)
 
-    encrypted_hash = {
-      decryption: decrypted_message,
-      key: key.to_s,
-      date: date.to_s
-    }
+    if key.class == String
+      encrypted_hash = {
+        decryption: decrypted_message,
+        key: key,
+        date: date.to_s
+      }
+    else
+      encrypted_hash = {
+        decryption: decrypted_message,
+        key: key.join,
+        date: date.to_s
+      }
+    end
 
   end
 end

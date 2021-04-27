@@ -9,15 +9,10 @@ class Enigma
                    :num_array
 
   def initialize
-    alphabet
     @key = Key.new
     @crypt = Crypt.new
     @range = (0..9).to_a
     @num_array = @range.sample(5)
-  end
-
-  def alphabet
-    ("a".."z").to_a << " "
   end
 
   def encrypt(message, key = @num_array, date = Date.today.strftime('%d%m%y').to_i)

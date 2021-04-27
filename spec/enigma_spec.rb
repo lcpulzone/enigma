@@ -10,14 +10,6 @@ RSpec.describe Enigma do
 
       expect(enigma).to be_an_instance_of(Enigma)
     end
-
-    it 'can create an alphabet' do
-      enigma = Enigma.new
-
-      actual = expected =["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "]
-
-      expect(enigma.alphabet).to eq(actual)
-    end
   end
 
   context 'encrypt' do

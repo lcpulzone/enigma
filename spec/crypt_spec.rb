@@ -70,19 +70,19 @@ RSpec.describe Crypt do
     it 'can change a word into an ordinal' do
       crypt = Crypt.new
 
-      expect(crypt.word_to_ord("leigh")).to eq([108, 101, 105, 103, 104])
+      expect(crypt.message_to_ord("leigh")).to eq([108, 101, 105, 103, 104])
     end
 
     it 'can shift the ord number to the right' do
       crypt = Crypt.new
-      expected = crypt.word_to_ord("leigh")
+      expected = crypt.message_to_ord("leigh")
 
       expect(crypt.shift_right(expected, 3)).to eq([111, 104, 108, 106, 107])
     end
 
     it 'shifted_num_array can change shifted number array to letters' do
       crypt = Crypt.new
-      expected = crypt.word_to_ord("leigh")
+      expected = crypt.message_to_ord("leigh")
       actual = crypt.shift_right(expected, 3)
 
       expect(crypt.shifted_num_array(actual)).to eq("ohljk")
@@ -93,7 +93,7 @@ RSpec.describe Crypt do
   context 'decrypt with .ord and .chr -dynamic-' do
     it 'can take an crypted word and change it to an ordinal array' do
       crypt = Crypt.new
-      expected = crypt.word_to_ord("leigh")
+      expected = crypt.message_to_ord("leigh")
       actual = crypt.shift_right(expected, 3)
       encrypted = crypt.shifted_num_array(actual)
 
@@ -102,7 +102,7 @@ RSpec.describe Crypt do
 
     it 'can shift the ord number to the left' do
       crypt = Crypt.new
-      expected = crypt.word_to_ord("leigh")
+      expected = crypt.message_to_ord("leigh")
       actual = crypt.shift_right(expected, 3)
       encrypted = crypt.shifted_num_array(actual)
       encrypted_array = crypt.encrypted_ord(encrypted)
@@ -112,7 +112,7 @@ RSpec.describe Crypt do
 
     it 'can turn ordinal array into a word' do
       crypt = Crypt.new
-      expected = crypt.word_to_ord("leigh")
+      expected = crypt.message_to_ord("leigh")
       actual = crypt.shift_right(expected, 3)
       encrypted = crypt.shifted_num_array(actual)
       encrypted_array = crypt.encrypted_ord(encrypted)
@@ -123,68 +123,70 @@ RSpec.describe Crypt do
   end
 
   context 'crypt & decrypt with optional key added' do
-    it 'word_to_ord can take an upper or lower case letter' do
+    it 'message_to_ord can take an upper or lower case letter' do
       crypt = Crypt.new
 
-      expect(crypt.word_to_ord("Leigh")).to eq([108, 101, 105, 103, 104])
+      expect(crypt.message_to_ord("Leigh")).to eq([108, 101, 105, 103, 104])
     end
 
-    it 'given_shift_right can change word according to calculated shift' do
+    it 'encrypt_message can change word according to calculated shift' do
       crypt = Crypt.new
-      expected = crypt.word_to_ord("leigh")
+      expected = crypt.message_to_ord("leigh")
 
-      expect(crypt.given_shift_right(expected, [2, 20, 13, 10])).to eq([110, 121, 118, 113, 106])
+      expect(crypt.encrypt_message(expected, [2, 20, 13, 10])).to eq([110, 121, 118, 113, 106])
     end
 
-    it 'given_shift_right can change a full name according to calculated shift' do
+    it 'encrypt_message can change a full name according to calculated shift' do
       crypt = Crypt.new
-      expected = crypt.word_to_ord("amber leigh")
+      expected = crypt.message_to_ord("amber leigh")
       shift_key = [2, 20, 13, 10]
       actual = [99, 102, 111, 111, 116, 32, 121, 111, 107, 97, 117]
 
-      expect(crypt.given_shift_right(expected, shift_key)).to eq(actual)
+      expect(crypt.encrypt_message(expected, shift_key)).to eq(actual)
     end
 
     it 'shifted_num_array can turn shifted ordinal array into crypted letters' do
       crypt = Crypt.new
-      expected = crypt.word_to_ord("amber leigh")
-      actual = crypt.given_shift_right(expected, [2, 20, 13, 10])
+      expected = crypt.message_to_ord("amber leigh")
+      actual = crypt.encrypt_message(expected, [2, 20, 13, 10])
 
       expect(crypt.shifted_num_array(actual)).to eq("cfoot yokau")
     end
 
     it 'crypted_ord can turn string into ordinal array' do
       crypt = Crypt.new
-      expected = crypt.word_to_ord("amber leigh")
-      actual = crypt.given_shift_right(expected, [2, 20, 13, 10])
+      expected = crypt.message_to_ord("amber leigh")
+      actual = crypt.encrypt_message(expected, [2, 20, 13, 10])
       encrypted = crypt.shifted_num_array(actual)
       encrypted_ord_array = [99, 102, 111, 111, 116, 32, 121, 111, 107, 97, 117]
 
       expect(crypt.encrypted_ord(encrypted)).to eq(encrypted_ord_array)
     end
 
-    it 'given_shift_left can change shift an ordinal array accoring to the key' do
+    it 'decrypt_messagecan change shift an ordinal array accoring to the key' do
       crypt = Crypt.new
-      expected = crypt.word_to_ord("amber leigh")
-      actual = crypt.given_shift_right(expected, [2, 20, 13, 10])
+      expected = crypt.message_to_ord("amber leigh")
+      actual = crypt.encrypt_message(expected, [2, 20, 13, 10])
       encrypted = crypt.shifted_num_array(actual)
       encrypted_ordinal_array = crypt.encrypted_ord(encrypted)
       shift_key = [2, 20, 13, 10]
       normal_array = [97, 109, 98, 101, 114, 32, 108, 101, 105, 103, 104]
 
-      expect(crypt.given_shift_left(encrypted_ordinal_array, shift_key)).to eq(normal_array)
+      expect(crypt.decrypt_message(encrypted_ordinal_array, shift_key)).to eq(normal_array)
     end
 
     it 'back_to_og_word can turn the normal array to a word' do
       crypt = Crypt.new
-      expected = crypt.word_to_ord("amber leigh")
-      actual = crypt.given_shift_right(expected, [2, 20, 13, 10])
+      expected = crypt.message_to_ord("amber leigh")
+      actual = crypt.encrypt_message(expected, [2, 20, 13, 10])
       encrypted = crypt.shifted_num_array(actual)
       encrypted_ordinal_array = crypt.encrypted_ord(encrypted)
       shift_key = [2, 20, 13, 10]
-      normal_array = crypt.given_shift_left(encrypted_ordinal_array, shift_key)
+      normal_array = crypt.decrypt_message(encrypted_ordinal_array, shift_key)
 
       expect(crypt.back_to_og_word(normal_array)).to eq("amber leigh")
     end
   end
 end
+
+# 33, 64, 35, 36, 37, 94, 38, 42, 40, 41, 123, 125, 91, 93, 124, 63, 47, 62, 60, 44, 46, 58, 58, 59, 39, 39, 95, 45, 43, 61

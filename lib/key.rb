@@ -8,8 +8,6 @@ class Key
                    :the_offset_array
 
   def initialize
-    @range = (0..9).to_a
-    @num_array = @range.sample(5)
     @the_key_array = []
     @the_offset_array = []
   end
@@ -22,24 +20,26 @@ class Key
     test
   end
 
-  def key_generator(key = @num_array)
+  def key_generator(key)
     if key.class == String
       key = key_into_integer(key)
+    elsif key.class == Integer
+      key = key.to_s
+      key = key_into_integer(key)
     end
-      key.each_cons(2) do |num|
-        @the_key_array << num.join.to_i
-      end
+    key.each_cons(2) do |num|
+      @the_key_array << num.join.to_i
+    end
     @the_key_array
   end
 
   def calculate_offset(date = Date.today)
-    sq_date = sq_date
     if date.class == Date
-      sq_date = date.strftime('%d%m%y').to_i
+      date = date.strftime('%d%m%y').to_i
     elsif date.class == String
-      sq_date = date.to_i
+      date = date.to_i
     end
-    sq_date_str = (sq_date**2).to_s
+    sq_date_str = (date**2).to_s
     last_four_dig = sq_date_str[6..9]
     @the_offset_array << last_four_dig.split("")
     @the_offset_array.flatten!

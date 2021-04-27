@@ -40,13 +40,13 @@ class Crypt
   end
 
 ###ENCRYPT -DYNAMIC-###
-  def word_to_ord(word)
-    word.chars.map do |letter|
+  def message_to_ord(message)
+    message.chars.map do |letter|
       (letter.downcase).ord
     end
   end
 
-  def given_shift_right(letter_array, key = 1)
+  def encrypt_message(letter_array, key = 1)
     counter = 0
     shifted = letter_array.map do |letter|
       if counter == 4
@@ -83,7 +83,7 @@ class Crypt
     end
   end
 
-  def given_shift_left(letter_array, key = 1)
+  def decrypt_message(letter_array, key = 1)
     counter = 0
     shifted = letter_array.map do |letter|
       if counter == 4

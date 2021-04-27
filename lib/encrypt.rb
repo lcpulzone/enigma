@@ -9,7 +9,7 @@ incoming_text = original_text.read
 
 original_text.close
 
-encrypted_text = enigma.encrypt(incoming_text.chomp, ARGV[2], ARGV[3])
+encrypted_text = enigma.encrypt(incoming_text.chomp)
 
 new_text = File.open(ARGV[1], "w")
 

@@ -12,20 +12,10 @@ class Key
     @the_offset_array = []
   end
 
-  def key_into_integer(string_key)
-    str_k = string_key.split("")
-    test = str_k.map do |key|
-      key.to_i
-    end
-    test
-  end
-
   def key_generator(key)
     if key.class == String
       key = key_into_integer(key)
-    elsif key.class == Integer
-      key = key.to_s
-      key = key_into_integer(key)
+    elsif data_type_check(key)
     end
     key.each_cons(2) do |num|
       @the_key_array << num.join.to_i
@@ -39,14 +29,10 @@ class Key
     elsif date.class == String
       date = date.to_i
     end
-    sq_date_str = (date**2).to_s
-    last_four_dig = sq_date_str[6..9]
-    @the_offset_array << last_four_dig.split("")
-    @the_offset_array.flatten!
+    square_root_to_offset_array(date)
   end
 
   def final_shift(key = @the_key_array, offset = @the_offset_array)
-    # key = key_generator(key = num_array)
     offset = calculate_offset
     counter = 0
     final = @the_key_array.map do |key|
@@ -58,5 +44,26 @@ class Key
       fine % 27
     end
     final_shift_key
+  end
+
+  def data_type_check(key)
+    key.class == Integer
+      key = key.to_s
+      key = key_into_integer(key)
+  end
+
+  def key_into_integer(string_key)
+    str_k = string_key.split("")
+    key = str_k.map do |key|
+      key.to_i
+    end
+    key
+  end
+
+  def square_root_to_offset_array(date)
+    sq_date_str = (date**2).to_s
+    last_four_dig = sq_date_str[6..9]
+    @the_offset_array << last_four_dig.split("")
+    @the_offset_array.flatten!
   end
 end

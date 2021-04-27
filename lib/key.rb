@@ -15,9 +15,7 @@ class Key
   def key_generator(key)
     if key.class == String
       key = key_into_integer(key)
-    elsif key.class == Integer
-      key = key.to_s
-      key = key_into_integer(key)
+    elsif data_type_check(key)
     end
     key.each_cons(2) do |num|
       @the_key_array << num.join.to_i
@@ -46,6 +44,12 @@ class Key
       fine % 27
     end
     final_shift_key
+  end
+
+  def data_type_check(key)
+    key.class == Integer
+      key = key.to_s
+      key = key_into_integer(key)
   end
 
   def key_into_integer(string_key)

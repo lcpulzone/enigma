@@ -52,7 +52,7 @@ class Crypt
     end
   end
 
-  def back_to_og_word(ord_array)
+  def original_message(ord_array)
     word = ord_array.map do |array|
       array.chr
     end

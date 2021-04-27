@@ -42,19 +42,19 @@ RSpec.describe Crypt do
       expect(crypt.encrypt_message(expected, shift_key)).to eq(actual)
     end
 
-    it 'back_to_og_word can turn shifted ordinal array into crypted letters' do
+    it 'original_message can turn shifted ordinal array into crypted letters' do
       crypt = Crypt.new
       expected = crypt.message_to_ord("amber leigh")
       actual = crypt.encrypt_message(expected, [2, 20, 13, 10])
 
-      expect(crypt.back_to_og_word(actual)).to eq("cfoot yokau")
+      expect(crypt.original_message(actual)).to eq("cfoot yokau")
     end
 
     it 'crypted_ord can turn string into ordinal array' do
       crypt = Crypt.new
       expected = crypt.message_to_ord("amber leigh")
       actual = crypt.encrypt_message(expected, [2, 20, 13, 10])
-      encrypted = crypt.back_to_og_word(actual)
+      encrypted = crypt.original_message(actual)
       encrypted_ord_array = [99, 102, 111, 111, 116, 32, 121, 111, 107, 97, 117]
 
       expect(crypt.message_to_ord(encrypted)).to eq(encrypted_ord_array)
@@ -64,7 +64,7 @@ RSpec.describe Crypt do
       crypt = Crypt.new
       expected = crypt.message_to_ord("amber leigh")
       actual = crypt.encrypt_message(expected, [2, 20, 13, 10])
-      encrypted = crypt.back_to_og_word(actual)
+      encrypted = crypt.original_message(actual)
       encrypted_ordinal_array = crypt.message_to_ord(encrypted)
       shift_key = [2, 20, 13, 10]
       normal_array = [97, 109, 98, 101, 114, 32, 108, 101, 105, 103, 104]
@@ -72,16 +72,16 @@ RSpec.describe Crypt do
       expect(crypt.decrypt_message(encrypted_ordinal_array, shift_key)).to eq(normal_array)
     end
 
-    it 'back_to_og_word can turn the normal array to a word' do
+    it 'original_message can turn the normal array to a word' do
       crypt = Crypt.new
       expected = crypt.message_to_ord("amber leigh")
       actual = crypt.encrypt_message(expected, [2, 20, 13, 10])
-      encrypted = crypt.back_to_og_word(actual)
+      encrypted = crypt.original_message(actual)
       encrypted_ordinal_array = crypt.message_to_ord(encrypted)
       shift_key = [2, 20, 13, 10]
       normal_array = crypt.decrypt_message(encrypted_ordinal_array, shift_key)
 
-      expect(crypt.back_to_og_word(normal_array)).to eq("amber leigh")
+      expect(crypt.original_message(normal_array)).to eq("amber leigh")
     end
   end
 end

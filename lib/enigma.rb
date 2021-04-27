@@ -17,7 +17,6 @@ class Enigma
 
   def encrypt(message, key = @num_array, date = Date.today.strftime('%d%m%y').to_i)
     encrypted_key = @key.key_generator(key)
-
     encrypted_offset = @key.calculate_offset(date)
     shift_key = @key.final_shift(encrypted_key, encrypted_offset)
     message_as_ord = @crypt.message_to_ord(message)
@@ -41,11 +40,8 @@ class Enigma
 
   def decrypt(message, key, date = Date.today.strftime('%d%m%y').to_i)
     encrypted_key = @key.key_generator(key)
-
     encrypted_offset = @key.calculate_offset(date)
-
     shift_key = @key.final_shift(encrypted_key, encrypted_offset)
-
     encrypted_ord = @crypt.message_to_ord(message)
     decrypted_ordinal_array = @crypt.decrypt_message(encrypted_ord, shift_key)
     decrypted_message = @crypt.ordinal_to_characters(decrypted_ordinal_array)
@@ -63,6 +59,5 @@ class Enigma
         date: date.to_s
       }
     end
-
   end
 end
